@@ -8,6 +8,18 @@ $(function () {
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
+  
+  var today = dayjs();
+  var day = today.format("D");
+  var month = today.format("M")
+  var year = today.format("YYYY");
+
+  if (!localStorage.getItem("date")) {
+    let array = JSON.stringify([day, month, year])
+    localStorage.setItem("date", array);
+  } 
+
+  var date = JSON.parse(localStorage.getItem("date"));
 
   var saveBtn = $(".saveBtn");
   saveBtn.on("click", function() {
@@ -22,11 +34,21 @@ $(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
   var today = dayjs();
+  var tomorrow = dayjs("2023-07-13");
   var hour = today.format("H");
+  var day = today.format("D");
+  var month = today.format("M")
   var year = today.format("YYYY");
   var date = today.format("dddd[,] MMMM DD")
-  console.log(hour);
+  var unixD = today.unix();
+  console.log("day: ", day);
+  console.log("Month: ", month);
   console.log(year);
+  console.log("Today: ", today);
+  console.log("Tomorrow: ", tomorrow);
+  console.log(today > tomorrow);
+  console.log("unix date: ", unixD);
+  console.log(hour);
   console.log(date);
   var hourId = $("[id^=hour]");
   
