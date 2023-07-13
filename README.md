@@ -20,7 +20,10 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 # Website
 
-![Work-day-scheduler-website](./assets/images/placeholder.png)
+![Work-day-scheduler-website](./Assets/images/work-day-scheduler.png)
 
 # Link
+
+https://danieltbonn.github.io/work-day-scheduler/
+
 
