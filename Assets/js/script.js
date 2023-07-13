@@ -29,13 +29,11 @@ $(function () {
   console.log(year);
   console.log(date);
   var hourId = $("[id^=hour]");
-  console.log(hourId);
-  console.log(hourId.children("textarea"));
   
   function currentTime() {
 
     for (let i = 0; i < hourId.length; i++) {
-      currentHour = Number(hourId[i].getAttribute("id").slice(5));
+      var currentHour = Number(hourId[i].getAttribute("id").slice(5));
       console.log(currentHour);
       if (currentHour < hour) {
         hourId[i].setAttribute("class", "row time-block past");
@@ -56,17 +54,20 @@ $(function () {
   function populateCalendar() {
 
     for (let i = 0; i < hourId.length; i++) {
-      currentHour = hourId[i].getAttribute("id");
-      console.log(hourId[i]);
+      var currentHour = hourId[i].getAttribute("id");
       var hourMessage = localStorage.getItem(currentHour); 
-      console.log(currentHour, ":" , hourMessage);
-      hourId.children("textarea").text(hourMessage);
-      
+      $("#" + currentHour).children("textarea").text(hourMessage)
+
     }
   }
 
   populateCalendar();
   // TODO: Add code to display the current date in the header of the page.
+
+  function addDate() {
+    $("#currentDay").text(date);
+  }
+  addDate();
 });
 console.log(localStorage);
 
