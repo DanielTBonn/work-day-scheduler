@@ -61,6 +61,7 @@ $(function () {
       var hourMessage = localStorage.getItem(currentHour); 
       console.log(currentHour, ":" , hourMessage);
       hourId.children("textarea").text(hourMessage);
+      
     }
   }
 
