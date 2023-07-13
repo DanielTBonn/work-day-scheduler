@@ -11,9 +11,8 @@ $(function () {
   
   var today = dayjs();
   var day = today.format("D");
-  var month = today.format("M");
+  var month = today.format("MM");
   var year = today.format("YYYY");
-  var year = 2023
 
   var date = JSON.parse(localStorage.getItem("date"));
 
@@ -24,29 +23,22 @@ $(function () {
     date = JSON.parse(localStorage.getItem("date"));
   }
 
+  console.log(date[2] + date[1] + date[0]);
+
   if (!localStorage.getItem("date")) {
     setDate();
   } 
 
-  console.log(!(date[2] > year))
   function checkDate() {
-
-    if (!(date[2] >= year)) {
+    var dateStored = date[2] + date[1] + date[0];
+    var dateChange = year + month + day;
+    
+    if (dateChange > dateStored) {
+      console.log("triggered")
       setDate();
     }
-
-    
-    if (!(date[1] >= month)) {
-      setDate();
-    }
-    
-    if (!(date[0] >= day)) {
-      setDate();
-    }
-    
-
   }
-  
+
   checkDate();
 
   console.log("dates: ", date)
