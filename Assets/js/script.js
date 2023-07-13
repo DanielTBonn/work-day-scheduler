@@ -11,15 +11,43 @@ $(function () {
   
   var today = dayjs();
   var day = today.format("D");
-  var month = today.format("M")
+  var month = today.format("M");
   var year = today.format("YYYY");
 
-  if (!localStorage.getItem("date")) {
-    let array = JSON.stringify([day, month, year])
+  function setDate() {
+    let array = JSON.stringify([day, month, year]);
     localStorage.setItem("date", array);
+  }
+
+  if (!localStorage.getItem("date")) {
+    setDate();
   } 
 
   var date = JSON.parse(localStorage.getItem("date"));
+  console.log(!(date[2] > year))
+  function checkDate() {
+
+    if (!(date[2] > year)) {
+      console.log("oi")
+      return;
+    }
+
+    
+    if (!(date[1] > month)) {
+      return;
+    }
+    
+    if (!(date[0] > day)) {
+      return;
+    }
+    
+    localStorage.clear();
+    setDate();
+
+  }
+  checkDate();
+
+  console.log("dates: ", date)
 
   var saveBtn = $(".saveBtn");
   saveBtn.on("click", function() {
@@ -33,33 +61,18 @@ $(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
-  var today = dayjs();
-  var tomorrow = dayjs("2023-07-13");
-  var hour = today.format("H");
-  var day = today.format("D");
-  var month = today.format("M")
-  var year = today.format("YYYY");
-  var date = today.format("dddd[,] MMMM DD")
-  var unixD = today.unix();
-  console.log("day: ", day);
-  console.log("Month: ", month);
-  console.log(year);
-  console.log("Today: ", today);
-  console.log("Tomorrow: ", tomorrow);
-  console.log(today > tomorrow);
-  console.log("unix date: ", unixD);
-  console.log(hour);
-  console.log(date);
+
+  var currentHour = today.format("H");
+  var formattedDate = today.format("dddd[,] MMMM DD")
   var hourId = $("[id^=hour]");
   
   function currentTime() {
 
     for (let i = 0; i < hourId.length; i++) {
-      var currentHour = Number(hourId[i].getAttribute("id").slice(5));
-      console.log(currentHour);
-      if (currentHour < hour) {
+      var hour = Number(hourId[i].getAttribute("id").slice(5));
+      if (hour < currentHour) {
         hourId[i].setAttribute("class", "row time-block past");
-      } else if (currentHour === hour) {
+      } else if (hour === currentHour) {
         hourId[i].setAttribute("class", "row time-block present");
       } else {
         hourId[i].setAttribute("class", "row time-block future");
@@ -74,12 +87,10 @@ $(function () {
   // attribute of each time-block be used to do this?
 
   function populateCalendar() {
-
     for (let i = 0; i < hourId.length; i++) {
-      var currentHour = hourId[i].getAttribute("id");
-      var hourMessage = localStorage.getItem(currentHour); 
-      $("#" + currentHour).children("textarea").text(hourMessage)
-
+      var hour = hourId[i].getAttribute("id");
+      var hourMessage = localStorage.getItem(hour); 
+      $("#" + hour).children("textarea").text(hourMessage)
     }
   }
 
@@ -87,7 +98,7 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
 
   function addDate() {
-    $("#currentDay").text(date);
+    $("#currentDay").text(formattedDate);
   }
   addDate();
 });
