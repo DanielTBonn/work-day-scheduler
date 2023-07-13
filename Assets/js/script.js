@@ -52,9 +52,10 @@ $(function () {
   function currentTime() {
     for (let i = 0; i < hourId.length; i++) {
       var hour = Number(hourId[i].getAttribute("id").slice(5));
+      currentHour = Number(currentHour);
       if (hour < currentHour) {
         hourId[i].setAttribute("class", "row time-block past");
-      } else if (hour == currentHour) {
+      } else if (hour === currentHour) {
         hourId[i].setAttribute("class", "row time-block present");
       } else {
         hourId[i].setAttribute("class", "row time-block future");
