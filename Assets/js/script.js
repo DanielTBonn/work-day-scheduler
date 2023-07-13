@@ -27,7 +27,6 @@ $(function () {
   if (!localStorage.getItem("date")) {
     setDate();
   } 
-  console.log(date[2] + date[1] + date[0]);
   
   function checkDate() {
     var dateStored = date[2] + date[1] + date[0];
