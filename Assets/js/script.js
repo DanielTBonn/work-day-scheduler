@@ -31,7 +31,6 @@ $(function () {
     var dateChange = year + month + day;
     
     if (dateChange > dateStored) {
-      console.log("triggered")
       setDate();
     }
   }
@@ -77,6 +76,7 @@ $(function () {
   function addDate() {
     $("#currentDay").text(formattedDate);
   }
+  
   addDate();
 });
 
