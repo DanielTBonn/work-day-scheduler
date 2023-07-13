@@ -2,21 +2,7 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
-
-## Table of Contents (Optional)
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
+As a student I have various duties I need to carry out in order to succeed in becoming a web developer. By building a work day scheduling application I can organize my day with ease and keep track of the tasks I need to accomplish. Building this application taught me how to use various web APIs such as jQuery and Day.js.
 
 # Website
 
