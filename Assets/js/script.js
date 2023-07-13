@@ -13,38 +13,40 @@ $(function () {
   var day = today.format("D");
   var month = today.format("M");
   var year = today.format("YYYY");
+  var year = 2023
+
+  var date = JSON.parse(localStorage.getItem("date"));
 
   function setDate() {
+    localStorage.clear();
     let array = JSON.stringify([day, month, year]);
     localStorage.setItem("date", array);
+    date = JSON.parse(localStorage.getItem("date"));
   }
 
   if (!localStorage.getItem("date")) {
     setDate();
   } 
 
-  var date = JSON.parse(localStorage.getItem("date"));
   console.log(!(date[2] > year))
   function checkDate() {
 
-    if (!(date[2] > year)) {
-      console.log("oi")
-      return;
+    if (!(date[2] >= year)) {
+      setDate();
     }
 
     
-    if (!(date[1] > month)) {
-      return;
+    if (!(date[1] >= month)) {
+      setDate();
     }
     
-    if (!(date[0] > day)) {
-      return;
+    if (!(date[0] >= day)) {
+      setDate();
     }
     
-    localStorage.clear();
-    setDate();
 
   }
+  
   checkDate();
 
   console.log("dates: ", date)
