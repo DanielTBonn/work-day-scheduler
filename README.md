@@ -20,6 +20,7 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 # Website
 
+![Work-day-scheduler-website](./assets/images/placeholder.png)
 
 # Link
 
