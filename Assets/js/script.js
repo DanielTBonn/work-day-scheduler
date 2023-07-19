@@ -1,20 +1,14 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
+
 $(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  
+
+  // Initialize variables that will be used to set, get, and verify the current date 
   var today = dayjs();
   var day = today.format("D");
   var month = today.format("MM");
   var year = today.format("YYYY");
   var date = JSON.parse(localStorage.getItem("date"));
 
+  // Sets the current date and deletes the previous schedule if called
   function setDate() {
     localStorage.clear();
     let array = JSON.stringify([day, month, year]);
@@ -22,10 +16,12 @@ $(function () {
     date = JSON.parse(localStorage.getItem("date"));
   }
 
+  // Checks to see if there is a date key in the localStorage and sets it if not
   if (!localStorage.getItem("date")) {
     setDate();
   } 
   
+  // Checks to see if todays date is greater than the date retrieved from local storage
   function checkDate() {
     var dateStored = date[2] + date[1] + date[0];
     var dateChange = year + month + day;
@@ -35,8 +31,10 @@ $(function () {
     }
   }
 
+  // Calls checkDate()
   checkDate();
 
+  // Saves the message inputted in the scheduler by the user into local storage
   var saveBtn = $(".saveBtn");
   saveBtn.on("click", function() {
     var parentId = $(this).parent().attr("id");
@@ -44,10 +42,12 @@ $(function () {
     localStorage.setItem(parentId, userInput);
   });
 
+  // Various variables keeping track of the date and time to display to the front end and the different message containers
   var currentHour = today.format("H");
   var formattedDate = today.format("dddd[,] MMMM DD")
   var hourId = $("[id^=hour]");
   
+  // Displays the color coded user interface according to its hourId and if it has passed the current hour
   function currentTime() {
     for (let i = 0; i < hourId.length; i++) {
       var hour = Number(hourId[i].getAttribute("id").slice(5));
@@ -62,6 +62,7 @@ $(function () {
     }
   }
 
+  // Creates the messages on the page from localStorage if available
   function populateCalendar() {
     for (let i = 0; i < hourId.length; i++) {
       var hour = hourId[i].getAttribute("id");
@@ -70,13 +71,16 @@ $(function () {
     }
   }
   
+  // Calls above two functions
   currentTime();
   populateCalendar();
   
+  // Adds the date to the top of the page
   function addDate() {
-    $("#currentDay").text(formattedDate);
+    $("#current-day").text(formattedDate);
   }
   
+  // Calls addDate() function
   addDate();
 });
 
